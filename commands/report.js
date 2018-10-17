@@ -1,9 +1,16 @@
 const Discord = require("discord.js");
 
 module.exports.run = (bot, message, args) => {
+    
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!rUser) return message.channel.send("Je ne trouve pas cet uttilisateur :thinking:... ");
+    if(!rUser) return message.channel.send("Je ne trouve pas cet uttilisateur :thinking:... !report @Uttilisateur raison");
+  
+
+
     let rreason = args.join(" ").slice(22);
+    if(!rreason) return message.channel.send("Veuillez mettre une raison. !report @Uttilisateur raison")
+
+    var guildID = '500373461580120066'
 
     let reportEmbed = new Discord.RichEmbed()
     .setDescription("Rapports :")
@@ -11,11 +18,15 @@ module.exports.run = (bot, message, args) => {
     .addField("Uttilisateur reporté :", `${rUser} with ID: ${rUser.id}`)
     .addField("Reporté par :", `${message.author} with ID: ${message.author.id}`)
     .addField("Salon :", message.channel)
+    .addField("Depuis le serveur :", guildID)
     .addField("Heure :", message.createdAt)
     .addField("Raison :", rreason);
 
-    let reportschannel = message.guild.channels.find(`name`, "reports");
-    if(!reportschannel) return message.channel.send("Crééz un salon 'reports' et je pourrais y poster les reports.");
+    
+    var guild = bot.guilds.get(guildID);
+
+    let reportschannel = guild.channels.find(`name`, "reports");
+    if(!reportschannel) return message.channel.send("Erreur Interne. Rééssayez ultérieurement.");
 
 
     message.delete().catch(O_o=>{});

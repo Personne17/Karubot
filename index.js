@@ -44,4 +44,4 @@ bot.on("message", message => {
   if (cmd) cmd.run(bot, message, args);
 });
 
-bot.login("NDU3MTk3OTUwNTUzMjkyODAw.DqkX8w.HiF3Oe6_0M6iSNuafbcnPVVvHTs");
+bot.login(token);

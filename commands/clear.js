@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const delay = require("timeout-as-promise")
 
 module.exports.run = (bot, message, args) => {
     
@@ -11,7 +10,6 @@ module.exports.run = (bot, message, args) => {
     message.channel.bulkDelete(args[0]).then(() => {
         message.channel.send(`${args[0]} messages ont été supprimés !`)       
     })
-    delay(5000).then(function() {
         msg.delete().catch(O_o => {});
     });
     

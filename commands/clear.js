@@ -10,10 +10,7 @@ module.exports.run = (bot, message, args) => {
     message.channel.bulkDelete(args[0]).then(() => {
         message.channel.send(`${args[0]} messages ont été supprimés !`)       
     })
-        msg.delete().catch(O_o => {});
-    });
-    
-
+        msg.delete().catch(O_o => {});    
 }
 module.exports.help = {
   name: "clear"

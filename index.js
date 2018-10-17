@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
 const bot = new discord.Client({disableEveryone: true});
+const token = process.env.token;
 
 // When bot ready
 bot.on("ready", () => {
@@ -43,4 +44,4 @@ bot.on("message", message => {
   if (cmd) cmd.run(bot, message, args);
 });
 
-bot.login(config.token);
+bot.login(token);

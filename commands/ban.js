@@ -10,11 +10,11 @@ if(args[0] == "help"){
   return;
 }
 let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-if(!bUser) return errors.cantfindUser(message.channel);
-if(bUser.id === bot.user.id) return errors.botuser(message); 
+if(!bUser) return message.reply("Je ne trouve pas cet utilisateur :thinking:...");
+if(bUser.id === bot.user.id) return message.send("je ne peut pas me ban moi-même :joy:"); 
 let bReason = args.join(" ").slice(22);
-if(!bReason) return errors.noReason(message.channel);
-if(bUser.hasPermission("MANAGE_MESSAGES")) return errors.equalPerms(message, bUser, "MANAGE_MESSAGES");
+if(!bReason) return msg.reply("Vous devez rentrer une raison.");
+if(bUser.hasPermission("MANAGE_MESSAGES")) return message.send("Je ne peut pas bannir cet uttilisateur.");
 
 let banEmbed = new Discord.RichEmbed()
 .setDescription("Ban !")

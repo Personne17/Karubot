@@ -3,6 +3,7 @@ const ms = require("ms");
 
 module.exports.run = async (bot, message, args) => {
 
+  let msg = message;
 
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Nope tu ne peut pas faire ça.");
   if(args[0] == "help"){
@@ -15,28 +16,10 @@ module.exports.run = async (bot, message, args) => {
   let reason = args.slice(2).join(" ");
   if(!reason) return message.reply("Merci d'entrer une raison.");
 
-  let muterole = message.guild.roles.find(`name`, "muted");
-  //start of create role
-  if(!muterole){
-    try{
-      muterole = message.guild.createRole({
-        name: "muted",
-        color: "#000000",
-        permissions:[]
-      })
-      message.guild.channels.forEach(async (channel, id) => {
-        channel.overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-        });
-      });
-    }catch(e){
-      console.log(e.stack);
-    }
-  }
-  //end of create role
+  let muterole = msg.guild.roles.find(`name`, "muted");
+
   let mutetime = args[1];
-  if(!mutetime) return message.reply("You didn't specify a time!");
+  if(!mutetime) return message.reply("Vous devez mettre pendant combien de temps il sera mute !");
 
   message.delete().catch(O_o=>{});
 

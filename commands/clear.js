@@ -13,7 +13,7 @@ module.exports.run = (bot, message, args) => {
         delay(1000).then(function() {
             message.channel.send(`${args[0]} messages ont été supprimés !`)  
             delay(5000).then(function() {
-                message.delete().catch(O_o=>{});
+                    message.delete().catch(O_o=>{});
             });   
         })
 

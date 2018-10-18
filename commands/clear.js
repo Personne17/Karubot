@@ -11,11 +11,12 @@ module.exports.run = (bot, message, args) => {
     if(!args[0]) return message.channel.send("Tu dois indiquer le nombre de messages à surpprimer !")
     message.channel.bulkDelete(args[0]).then(() => {
         delay(1000).then(function() {
-            message.channel.send(`${args[0]} messages ont été supprimés !`)       
+            message.channel.send(`${args[0]} messages ont été supprimés !`)  
+            delay(5000).then(function() {
+                message.delete().catch(O_o=>{});
+            });   
         })
-        delay(5000).then(function() {
-            message.delete()
-        });
+
         return;
     })
 

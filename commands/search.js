@@ -8,7 +8,7 @@ module.exports.run = (bot, message, args) => {
             .setColor("RANDOM")
             .setTitle("Voici votre recherche : ")
             .setDescription(`https://www.google.fr/search?q=` + args.join('+'))
-            .setThumbnail(`./images/google.png`)
+            .setThumbnail(`https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png`)
             msg.channel.send(search_embed);
 
 }

@@ -5,8 +5,9 @@ module.exports.run = (bot, message, args) => {
     
     let msg = message;
     if(args > 100) {
-        args = 100
+        args[0] = 100
     }
+
     if(args <= 1) return msg.channel.send("Le nombre de messages à supprimmer doit être supérieur à 1")
     if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send("Vous n'avez pas les permissions requises pour effectuer cette commande. ('MANAGE_MESSAGES') !");
 

@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+croisconst Discord = require("discord.js");
 
 module.exports.run = (bot, message, args) => {
     
@@ -31,6 +31,7 @@ module.exports.run = (bot, message, args) => {
 
     message.delete().catch(O_o=>{});
     reportschannel.send(reportEmbed);
+    message.channel.send("Utilisateur reporté !")
 
 }
 

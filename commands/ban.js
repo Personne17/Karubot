@@ -9,9 +9,11 @@ if(args[0] == "help"){
   message.reply("Usage: !ban <user> <reason>");
   return;
 }
+
+let msg = message;
 let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 if(!bUser) return message.reply("Je ne trouve pas cet utilisateur :thinking:...");
-if(bUser.id === bot.user.id) return message.send("je ne peut pas me ban moi-même :joy:"); 
+if(bUser.id === bot.user.id) return message.channel.send("je ne peut pas me ban moi-même :joy:"); 
 let bReason = args.join(" ").slice(22);
 if(!bReason) return msg.reply("Vous devez rentrer une raison.");
 if(bUser.hasPermission("MANAGE_MESSAGES")) return message.send("Je ne peut pas bannir cet uttilisateur.");

@@ -3,6 +3,7 @@ const fs = require("fs");
 const config = require("./config.json");
 const bot = new discord.Client({disableEveryone: true});
 const token = process.env.token;
+const delay = require("timeout-as-promise");
 
 // When bot ready
 bot.on("ready", () => {
@@ -44,4 +45,4 @@ bot.on("message", message => {
   if (cmd) cmd.run(bot, message, args);
 });
 
-bot.login(token);
+bot.login("NDU3MTk3OTUwNTUzMjkyODAw.DqkX8w.HiF3Oe6_0M6iSNuafbcnPVVvHTs");

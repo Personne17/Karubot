@@ -90,7 +90,7 @@ bot.on("message", message => {
   if (!command.startsWith(prefix)) return;
 
 
-  switch (args[0].toLowerCase()) { 
+  switch (args.toLowerCase()) { 
 
   case "play":
 

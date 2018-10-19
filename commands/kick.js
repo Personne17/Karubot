@@ -10,7 +10,7 @@ module.exports.run = (bot, message, args) => {
     let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!kUser) return message.reply("Je ne trouve pas cet utilisateur :thinking:...");
     let kReason = args.join(" ").slice(22);
-    if(kUser.hasPermission("MANAGE_MESSAGES")) return message.reply("Je ne peut pas kick cet utilisateur.");
+    if(kUser.hasPermission("ADMINISTRATOR")) return message.reply("Je ne peut pas kick cet utilisateur.");
 
     let kickEmbed = new Discord.RichEmbed()
     .setDescription("Kick !")

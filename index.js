@@ -87,9 +87,9 @@ bot.on("message", message => {
   let messageArray = message.content.split(" ");
 
 
-
+  let args = message.content.substring(prefix.length).split(" ");
   switch (args[0].toLowerCase()) { 
-  var args = message.content.substring(prefix.length).split(" ");
+
 
   case "play":
 

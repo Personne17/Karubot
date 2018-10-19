@@ -85,16 +85,15 @@ bot.on("message", message => {
   if (message.channel.type === "dm") return;
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");
-  let command = messageArray[0].toLowerCase();
-  let args = messageArray.slice(1);
-  if (!command.startsWith(prefix)) return;
 
 
-  switch (args.toLowerCase()) { 
+
+  switch (args[0].toLowerCase()) { 
+  var args = message.content.substring(prefix.length).split(" ");
 
   case "play":
 
-  if (!args) {
+  if (!args[1]) {
 
   message.channel.sendMessage("Tu dois m’indiquer un lien YouTube"); 
 
@@ -121,7 +120,7 @@ bot.on("message", message => {
 var server = servers[message.guild.id];
 
 
-server.queue.push(args);
+server.queue.push(args[1]);
 
 if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
 
@@ -157,8 +156,9 @@ case "stop":
 
   break;
 }
-
-
+ let args = messageArray.slice(1);
+  let command = messageArray[0].toLowerCase();
+  if (!command.startsWith(prefix)) return;
 
   let cmd = bot.commands.get(command.slice(prefix.length));
   if (cmd) cmd.run(bot, message, args);

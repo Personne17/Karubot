@@ -85,11 +85,13 @@ bot.on("message", message => {
   if (message.channel.type === "dm") return;
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");
+  let command = messageArray[0].toLowerCase();
+ 
+  if (!command.startsWith(prefix)) return;
 
-
-  let args = message.content.substring(prefix.length).split(" ");
+  if(message.content.startsWith(prefix)) {
+    let args = message.content.substring(prefix.length).split(" ");
   switch (args[0].toLowerCase()) { 
-
 
   case "play":
 
@@ -155,11 +157,11 @@ case "stop":
   message.member.voiceChannel.leave();
 
   break;
+  }
 }
- let args = messageArray.slice(1);
-  let command = messageArray[0].toLowerCase();
-  if (!command.startsWith(prefix)) return;
 
+
+  let args = messageArray.slice(1);
   let cmd = bot.commands.get(command.slice(prefix.length));
   if (cmd) cmd.run(bot, message, args);
 });

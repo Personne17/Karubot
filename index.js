@@ -33,12 +33,6 @@ bot.on("guildMemberAdd", member => {
   const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
   if(!member.id.startsWith('479791519252086786' || '413728456942288896')) return channel.send(`Bienvenue à : ${member} sur le serveur !`);
 
-  if(member.id.startsWith('413728456942288896' || '479791519252086786')) {
-  member.kick()
-  return;
-  
-  }
-
   return;
 })
 

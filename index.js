@@ -3,6 +3,7 @@ const fs = require("fs");
 const config = require("./config.json");
 const bot = new discord.Client({disableEveryone: true});
 const token = process.env.token;
+var ffmpeg = require('ffmpeg');
 const delay = require("timeout-as-promise");
 var up = true
 const ytdl = require('ytdl-core');

@@ -45,6 +45,17 @@ bot.on("message", message => {
   let messageArray = message.content.split(" ");
   let command = messageArray[0].toLowerCase();
   let args = messageArray.slice(1);
+  let blacklisted = ['pute', 'merde', 'con', 'connard', 'connards', 'merd', 'conne', 'connes', 'merdes', 'bite']
+  let foundInText = false;
+  for(var i in blacklisted) {
+    if(message.content.toLowerCase().includes(blacklisted[i].toLowerCase())) foundInText = true;
+  }
+
+  if(foundInText) {
+    message.delete();
+    message.channel.send("Merci de ne pas envoyer d'insultes.");
+    console.log(blacklisted[i].toLowerCase());
+  }
 
   if (!command.startsWith(prefix)) return;
 

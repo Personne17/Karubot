@@ -12,7 +12,9 @@
     "discord.js": "^11.4.2",
     "ms": "^2.1.1",
     "nodemon": "^1.18.4",
-    "timeout-as-promise": "^1.0.0"
+    "opusscript": "0.0.6",
+    "timeout-as-promise": "^1.0.0",
+    "ytdl-core": "^0.26.3"
   },
   "devDependencies": {}
 }

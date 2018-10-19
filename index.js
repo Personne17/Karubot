@@ -5,6 +5,25 @@ const bot = new discord.Client({disableEveryone: true});
 const token = process.env.token;
 const delay = require("timeout-as-promise");
 const up = true
+const ytdl = require('ytdl-core');
+const queue = new Map();
+var servers = {};
+
+function play(connection, message) {
+  
+  var server = servers[message.guild.id];
+
+  server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
+
+  server.queue.shift();
+
+  server.dispatcher.on("end", function() { 
+    if (server.queue[0]) play(connection, message);
+
+    else connection.disconnect();
+
+  });
+}
 
 // When bot ready
 bot.on("ready", () => {

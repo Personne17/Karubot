@@ -29,6 +29,19 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
+bot.on("guildMemberAdd", member => {
+  const channel = member.guild.channels.channels.find(ch => ch.name === '🎃bienvenue🎃');
+  if(member.id !== '479791519252086786') return channel.send(`Bienvenue à : ${member} sur le serveur !`);
+
+  if(member.kickable) {
+  member.kick()
+  return;
+  }
+
+  return;
+})
+
+
 // Message event
 bot.on("message", message => {
   if (message.author.bot) return;

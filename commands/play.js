@@ -5,7 +5,7 @@ const Discord = require("discord.js");
 module.exports.run = (bot, message, args) => {
           
     let msg = message;
-    if (!args[1]) {
+    if (!args) {
 
         message.channel.sendMessage("Tu dois m’indiquer un lien YouTube"); 
         

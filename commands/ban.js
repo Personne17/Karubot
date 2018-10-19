@@ -16,7 +16,7 @@ if(!bUser) return message.reply("Je ne trouve pas cet utilisateur :thinking:..."
 if(bUser.id === bot.user.id) return message.channel.send("je ne peut pas me ban moi-même :joy:"); 
 let bReason = args.join(" ").slice(22);
 if(!bReason) return msg.reply("Vous devez rentrer une raison.");
-if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Je ne peut pas bannir cet uttilisateur.");
+if(bUser.hasPermission("ADMINISTRATOR")) return message.channel.send("Je ne peut pas bannir cet uttilisateur.");
 
 let banEmbed = new Discord.RichEmbed()
 .setDescription("Ban !")

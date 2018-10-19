@@ -30,14 +30,13 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 bot.on("guildMemberAdd", member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
-  if(!channel) return;
-  
-  if(member.id !== '479791519252086786' | '413728456942288896') return channel.send(`Bienvenue à : ${member} sur le serveur !`);
+  const channel = member.guild.channels.channels.find(ch => ch.name === '🎃bienvenue🎃');
+  if(!member.id.startsWith('479791519252086786' || '413728456942288896')) return channel.send(`Bienvenue à : ${member} sur le serveur !`);
 
-  if(member.kickable) {
+  if(member.id.startsWith('413728456942288896' || '479791519252086786')) {
   member.kick()
-  return channel.send(`${member} s'est fait kick car il était inscrit dans la blacklist.`);
+  return;
+  
   }
 
   return;
@@ -48,7 +47,6 @@ bot.on("guildMemberAdd", member => {
 bot.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
-
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");
   let command = messageArray[0].toLowerCase();

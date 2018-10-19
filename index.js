@@ -4,6 +4,7 @@ const config = require("./config.json");
 const bot = new discord.Client({disableEveryone: true});
 const token = process.env.token;
 const delay = require("timeout-as-promise");
+const up = true
 
 // When bot ready
 bot.on("ready", () => {
@@ -11,6 +12,14 @@ bot.on("ready", () => {
   bot.user.setActivity(`.help | ${bot.guilds.size} serveur(s)`, {type: "WATCHING"})
   .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
   .catch(console.error);
+
+  while(up === true) {
+    up = false
+  delay(17000000).then(function() {
+    console.log("Up !")
+    up = true
+    })
+  }
 });
 
 // Load commands

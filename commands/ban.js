@@ -32,6 +32,7 @@ if(!incidentchannel) return message.channel.send("veuillez créér un salon nomm
 
 message.guild.member(bUser).ban(bReason);
 incidentchannel.send(banEmbed);
+bUser.send(bReason);
 
 }
 module.exports.help = {

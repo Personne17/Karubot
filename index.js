@@ -33,11 +33,25 @@ bot.on("guildMemberAdd", member => {
   const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
   channel.send(`Bienvenue à : ${member} sur le serveur !`);
 
+  
+  var role = member.guild.roles.find('name', 'Verif');
+  if(!role) return;
+
+  member.addRole(role)
+
+
+
   return;
 })
 
+bot.on("guildMemberRemove", member => {
+  
+  member.guild.channels.get('name', 'bienvenue').send('**' + member.user.username + '**, a quitté le serveur D:');
+  
+})
 
-// Message event
+
+// Message 
 bot.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
@@ -45,11 +59,14 @@ bot.on("message", message => {
   let messageArray = message.content.split(" ");
   let command = messageArray[0].toLowerCase();
   let args = messageArray.slice(1);
-  let blacklisted = ['pute', 'merde', 'con', 'connard', 'connards', 'merd', 'conne', 'connes', 'merdes', 'bite']
+
+
+  let blacklisted = ['pute', 'merde', 'con', 'connard', 'connards', 'merd', 'conne', 'connes', 'merdes']
   let foundInText = false;
   for(var i in blacklisted) {
     if(message.content.toLowerCase().includes(blacklisted[i].toLowerCase())) foundInText = true;
   }
+
 
   if(foundInText) {
     message.delete();

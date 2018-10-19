@@ -87,10 +87,78 @@ bot.on("message", message => {
   let messageArray = message.content.split(" ");
   let command = messageArray[0].toLowerCase();
   let args = messageArray.slice(1);
-
-
-
   if (!command.startsWith(prefix)) return;
+
+
+  switch (args[0].toLowerCase()) { 
+
+  case "play":
+
+  if (!args) {
+
+  message.channel.sendMessage("Tu dois m’indiquer un lien YouTube"); 
+
+  return;
+
+}
+
+  if(!message.member.voiceChannel) {
+
+  message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
+
+  return;
+
+}
+
+
+  if(!servers[message.guild.id]) servers[message.guild.id] = {
+
+  queue: []
+
+};
+
+
+var server = servers[message.guild.id];
+
+
+server.queue.push(args);
+
+if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+
+play(connection, message) 
+
+});
+
+break; 
+
+case "skip":
+
+  if(!message.member.voiceChannel) {
+
+  message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
+
+  return;
+
+}
+
+  var server = servers[message.guild.id];
+
+  if(server.dispatcher) server.dispatcher.end();
+
+  break;
+
+case "stop":
+
+  if(!message.member.voiceChannel) 
+  
+  return message.channel.send(":x: Tu dois être dans un salon vocal");
+
+  message.member.voiceChannel.leave();
+
+  break;
+}
+
+
 
   let cmd = bot.commands.get(command.slice(prefix.length));
   if (cmd) cmd.run(bot, message, args);

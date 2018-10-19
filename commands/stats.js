@@ -10,7 +10,7 @@ module.exports.run = (bot, message, args) => {
         .addField("Vous avez rejoint le serveur le :", `${msg.guild.joinedAt}.`, false)
         .addField("Votre ID :", `${msg.author.id}.`, true)
         .addField("Date de création de votre compte :", userCreateDate[1] + ' ' + userCreateDate[2] + ' ' + userCreateDate[3])
-        .setThumbnail(msg.author.avatarURL)
+        .setThumbnail(msg.author.displayAvatarURL)
         .setColor("RANDOM")
         msg.channel.send("Vos stats vous ont étées envoyées par message privé ! :smile:")
         msg.author.send(stats_embed)

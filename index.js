@@ -31,7 +31,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("guildMemberAdd", member => {
   const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
-  if(!member.id.startsWith('479791519252086786' || '413728456942288896')) return channel.send(`Bienvenue à : ${member} sur le serveur !`);
+  channel.send(`Bienvenue à : ${member} sur le serveur !`);
 
   return;
 })

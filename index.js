@@ -33,11 +33,11 @@ bot.on("guildMemberAdd", member => {
   const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
   if(!channel) return;
   
-  if(member.id !== '479791519252086786') return channel.send(`Bienvenue à : ${member} sur le serveur !`);
+  if(member.id !== '479791519252086786' | '413728456942288896') return channel.send(`Bienvenue à : ${member} sur le serveur !`);
 
   if(member.kickable) {
   member.kick()
-  return;
+  return channel.send(`${member} s'est fait kick car il était inscrit dans la blacklist.`);
   }
 
   return;

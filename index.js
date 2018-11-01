@@ -10,6 +10,19 @@ const ytdl = require('ytdl-core');
 const queue = new Map();
 var servers = {};
 
+require('http').createServer((req, res) => {
+    console.log(req.url);
+    res.end("Hello World!");
+}).listen(5555);
+ 
+// If the master asks us to stop, do so
+process.on('SIGINT', () => {
+    console.log("Goodbye World!");
+ 
+    // Implicitly calls server.close, then disconnects the IPC channel:
+    require('cluster').worker.disconnect();
+});
+
 function play(connection, message) {
   
   var server = servers[message.guild.id];

@@ -1,6 +1,0 @@
-{
-    "applications": [{
-        "name": "antiraidbot",
-        "run": "index.js"
-    }]
-}

@@ -1,1 +1,1 @@
-worker: nodemon index.js
+worker: final-pm start antiraidbot

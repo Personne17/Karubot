@@ -8,8 +8,8 @@ module.exports.run = async (bot, message, args) => {
     .setColor("#15f153")
     .setThumbnail(boticon)
     .addField("Nom du bot :", bot.user.username)
-    .addField("Créé le :", bot.user.createdAt);
-    .addField("Créé par :", "`_Personn_#0524`")
+    .addField("Créé le :", bot.user.createdAt)
+    .addField("Créé par :", "`_Personn_#0524`");
 
     message.channel.send(botembed);
 }

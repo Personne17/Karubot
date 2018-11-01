@@ -16,8 +16,7 @@
     "nodemon": "^1.18.4",
     "opusscript": "0.0.6",
     "timeout-as-promise": "^1.0.0",
-    "ytdl-core": "^0.26.3",
-    "final-pm": "^2.22.0"
+    "ytdl-core": "^0.26.3"
   },
   "devDependencies": {}
 }

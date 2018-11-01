@@ -76,7 +76,7 @@ bot.on("guildMemberAdd", member => {
 bot.on("guildMemberRemove", member => {
   
   const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
-  channel.send(`${member} a quitté le serveur D: !`);
+  ch.send(`${member} a quitté le serveur D: !`);
 
  
 

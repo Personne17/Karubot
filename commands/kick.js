@@ -21,8 +21,8 @@ module.exports.run = (bot, message, args) => {
     .addField("A :", message.createdAt)
     .addField("Raison :", kReason);
 
-    let kickChannel = message.guild.channels.find(`name`, "incidents");
-    if(!kickChannel) return message.channel.send("Veuillez créér un salon 'incidents' pour effectuer cette commande.");
+    let kickChannel = message.guild.channels.find(`name`, "logs");
+    if(!kickChannel) return message.channel.send("Veuillez créér un salon 'logs' pour effectuer cette commande.");
 
     message.guild.member(kUser).kick(kReason);
     kickChannel.send(kickEmbed);

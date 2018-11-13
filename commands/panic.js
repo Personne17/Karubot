@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 module.exports.run = (bot, message, args) => {
 
+    let guild = msg.guild
     let msg = message;
 
     if(msg.guild.member(msg.author) !== msg.guild.owner) return msg.reply("Vous devez être le fondateur du serveur pour effectuer cette commande.");

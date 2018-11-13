@@ -11,12 +11,11 @@ module.exports.run = (bot, message, args, delay) => {
 
     guild.members.map(m => {
         message.channel.send(`${m} s'est fait kick ! *Il a pas de chance celui là*`)
-        delay(100).then(function() {
         if(m.kickable) {
             m.kick();
      
         }
-        })
+      
     })
     return;
 }

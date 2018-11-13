@@ -58,32 +58,7 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
-bot.on("guildMemberAdd", member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
-  channel.send(`Bienvenue à : ${member} sur le serveur !`);
 
-  
-  var role = member.guild.roles.find('name', 'Verif');
-  if(!role) return;
-
-  member.addRole(role)
-
-
-
-  return;
-})
-
-bot.on("guildMemberRemove", member => {
-  
-  const channel = member.guild.channels.find(ch => ch.name === 'bienvenue');
-  ch.send(`${member} a quitté le serveur D: !`);
-
- 
-
-})
-
-
-// Message 
 bot.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;

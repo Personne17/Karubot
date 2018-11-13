@@ -12,7 +12,7 @@ module.exports.run = (bot, message, args) => {
     guild.members.map(m => {
         if(m.kickable) {
             m.kick();
-            message.channel.send(`${m.username} s'est fait kick ! *Il a pas de chance celui là*`)
+            message.channel.send(`${m} s'est fait kick ! *Il a pas de chance celui là*`)
         }
     })
     return;

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, delay) => {
 
     let guild = message.guild
     let msg = message;
@@ -10,10 +10,13 @@ module.exports.run = (bot, message, args) => {
     if(!guild.me.hasPermission("KICK_MEMBERS")) return msg.reply("Je ne peut pas effectuer cette commande car je n'ai pas la permission 'KICK_MEMBERS'.");
 
     guild.members.map(m => {
+        message.channel.send(`${m} s'est fait kick ! *Il a pas de chance celui là*`)
+        delay(10).then(function()
         if(m.kickable) {
             m.kick();
-            message.channel.send(`${m} s'est fait kick ! *Il a pas de chance celui là*`)
+     
         }
+                       )
     })
     return;
 }

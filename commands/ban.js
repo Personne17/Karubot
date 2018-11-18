@@ -1,40 +1,38 @@
 
 const Discord = require("discord.js");
 
-module.exports.run = (client, msg, args, guild) => {
-  var achannel = client.channels.get("513420946523291658")
-      var bchannel = client.channels.get("513387249153474561")
-        msg.delete();
-        if(!msg.member.hasPermission("BAN_MEMBERS")) return;
-          if(args[0] == "help"){
-          bchannel.send("Uttilisation: !ban <utilisateur> <raison>");
-          return;
-        }
+module.exports.run = (bot, message, args) => {
 
-        let bUser = guild.member(msg.mentions.users.first() || guild.members.get(args[0]));
-        if(!bUser) return bchannel.send("C'est qui lui ? Il existe pas :thinking: !");
-        if(bUser.id === client.user.id) return bchannel.send("Je ne peut pas me ban moi-même :joy:");
-        let bReason = args.join(" ").slice(22);
-        if(!bReason) return bchannel.send(`Ah tu veut ban ${bUser} ? C'est quoi ta raison :joy:?`);
-        if(bUser.id == msg.author.id) return bchannel.send("AH ! J'avais jamais vu quelqu'un se ban soi-même avant, tiens :joy:")
-        if(bUser.id == 408281273736626187) return bchannel.send("`_Personn_#0524` ? Y'a encore un idiot qui veut te ban :joy:!")
-        if(bUser.id == 499239421225205760) return bchannel.send("Runomos-le-grand ne peut pas être banni, IGNORANT :joy:!")
-        if(bUser.hasPermission("ADMINISTRATOR")) return bchannel.send("T'est qui pour vouloir bannir un admin toi ? T'est Personn :joy:");
+    message.delete();
+if(!message.member.hasPermission("BAN_MEMBERS")) return errors.noPerms(message, "BAN_MEMBERS");
+if(args[0] == "help"){
+  message.reply("Utilisation: !ban <user> <reason>");
+  return;
+}
 
-        let banEmbed = new Discord.RichEmbed()
-        .setDescription("Ban !")
-        .setColor("#bc0000")
-        .addField("Utilisateur Banni :", `${bUser.username} avec l'id : ${bUser.id}`)
-        .addField("Banni par :", `<@${msg.author.username}> avec l'id : ${msg.author.id}`)
-        .addField("Banni dans :", `${msg.channel.name}`)
-        .addField("A :", msg.createdAt)
-        .addField("Raison :", bReason);
+let msg = message;
+let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+if(!bUser) return message.reply("Je ne trouve pas cet utilisateur :thinking:...");
+if(bUser.id === bot.user.id) return message.channel.send("je ne peut pas me ban moi-même :joy:");
+let bReason = args.join(" ").slice(22);
+if(!bReason) return msg.reply("Vous devez rentrer une raison.");
+if(bUser.hasPermission("MANAGE_MESSAGES")) return message.send("Je ne peut pas bannir cet uttilisateur.");
 
-        let incidentchannel = client.channels.get("513354844564881430");
+let banEmbed = new Discord.RichEmbed()
+.setDescription("Ban !")
+.setColor("#bc0000")
+.addField("Utilisateur Banni :", `${bUser} avec l'ID : ${bUser.id}`)
+.addField("Banni par :", `<@${message.author.id}> avec l'ID : ${message.author.id}`)
+.addField("Banni dans :", "message.channel")
+.addField("A :", message.createdAt)
+.addField("Raison :", bReason);
 
-        guild.member(bUser).ban(bReason);
-        incidentchannel.send(banEmbed);
-        bUser.send(bReason);
+let incidentchannel = message.guild.channels.find(`name`, "incidents");
+if(!incidentchannel) return message.channel.send("veuillez créér un salon nommé 'incidents' pour pouvoir effectuer cette commande.");
+
+message.guild.member(bUser).ban(bReason);
+incidentchannel.send(banEmbed);
+
 }
 module.exports.help = {
   name: "ban"

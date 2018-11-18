@@ -1,36 +1,16 @@
 const discord = require("discord.js");
 const fs = require("fs");
-const config = require("./config.json");
-const bot = new discord.Client({disableEveryone: true});
+const client = new discord.Client({disableEveryone: true});
 const token = process.env.token;
 var ffmpeg = require('ffmpeg');
 var delay = require("timeout-as-promise");
-var up = true
-const ytdl = require('ytdl-core');
-const queue = new Map();
-var servers = {};
+var up = false;
 
-function play(connection, message) {
-  
-  var server = servers[message.guild.id];
 
-  server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
-
-  server.queue.shift();
-
-  server.dispatcher.on("end", function() { 
-    if (server.queue[0]) play(connection, message);
-
-    else connection.disconnect();
-
-  });
-}
-
-// When bot ready
-bot.on("ready", () => {
-  console.log(`${bot.user.username} est prêt à kick !`);
-  bot.user.setActivity(`.help | ${bot.guilds.size} serveur(s)`, {type: "WATCHING"})
-  .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
+client.on("ready", () => {
+  console.log(`${client.user.username} est prêt !`);
+  client.user.setActivity(`$help | ${client.guilds.size} serveur(s)`, {type: "WATCHING"})
+  .then(presence => console.log(`Activité : ${presence.game ? presence.game.name : 'none'}`))
   .catch(console.error);
 
   while(up === true) {
@@ -43,7 +23,7 @@ bot.on("ready", () => {
 });
 
 // Load commands
-bot.commands = new discord.Collection();
+client.commands = new discord.Collection();
 fs.readdir("./commands/", (err, files) => {
   if (err) console.error(err);
   let jsfiles = files.filter(f => f.split(".").pop() === "js");
@@ -54,95 +34,33 @@ fs.readdir("./commands/", (err, files) => {
   jsfiles.forEach((f, i) => {
     let props = require(`./commands/${f}`);
     console.log(`${i + 1}: ${f} chargée !`);
-    bot.commands.set(props.help.name, props);
+    client.commands.set(props.help.name, props);
   });
 });
 
+client.on("guildMemberAdd", m => {
+    let bbchannel = client.channels.get("513343745735917616")
+    bbchannel.send("Hey ! " + m + " Bienvenue sur : :white_large_square::arrow_right:SERVEUR COOL:arrow_left::white_large_square: !")
+})
 
-bot.on("message", message => {
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-  let prefix = config.prefix;
-  let messageArray = message.content.split(" ");
+client.on("guildMemberRemove", mr => {
+  let rchannel = client.channels.get("513343745735917616")
+  rchannel.send(mr + ", puisse son nom rester à jamais oublié, viens de quitter le serveur. :skull:")
+})
+
+
+client.on("message", msg => {
+  if (msg.author.bot) return;
+  if (msg.channel.type === "dm") return;
+  let prefix = "$";
+  let messageArray = msg.content.split(" ");
   let command = messageArray[0].toLowerCase();
- 
+  let guild = client.guilds.get("513343745735917614");
   if (!command.startsWith(prefix)) return;
 
-  if(message.content.startsWith(prefix)) {
-    let args = message.content.substring(prefix.length).split(" ");
-  switch (args[0].toLowerCase()) { 
-
-  case "play":
-
-  if (!args[1]) {
-
-  message.channel.sendMessage("Tu dois m’indiquer un lien YouTube"); 
-
-  return;
-
-}
-
-  if(!message.member.voiceChannel) {
-
-  message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
-
-  return;
-
-}
-
-
-  if(!servers[message.guild.id]) servers[message.guild.id] = {
-
-  queue: []
-
-};
-
-
-var server = servers[message.guild.id];
-
-
-server.queue.push(args[1]);
-
-if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-
-play(connection, message) 
-
-});
-
-break; 
-
-case "skip":
-
-  if(!message.member.voiceChannel) {
-
-  message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
-
-  return;
-
-}
-
-  var server = servers[message.guild.id];
-
-  if(server.dispatcher) server.dispatcher.end();
-
-  break;
-
-case "stop":
-
-  if(!message.member.voiceChannel) 
-  
-  return message.channel.send(":x: Tu dois être dans un salon vocal");
-
-  message.member.voiceChannel.leave();
-
-  break;
-  }
-}
-
-
   let args = messageArray.slice(1);
-  let cmd = bot.commands.get(command.slice(prefix.length));
-  if (cmd) cmd.run(bot, message, args);
+  let cmd = client.commands.get(command.slice(prefix.length));
+  if (cmd) cmd.run(client, msg, args, guild);
 });
 
-bot.login(token);
+client.login("NTEzNDE1MjE5OTIyMzM3Nzk4.DtHqyg.DNBfu9Bqb1Z27qhUos9S2LcLIjo");

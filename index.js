@@ -2,13 +2,13 @@ const discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
 const bot = new discord.Client({disableEveryone: true});
-const token = process.env.token;
+const token = "NDU3MTk3OTUwNTUzMjkyODAw.DvQtAw.EnYzKIwyfTQcc9eiLOdeAtzPWbU";
 const delay = require("timeout-as-promise");
 
 // When bot ready
 bot.on("ready", () => {
   console.log(`${bot.user.username} est prêt à kick !`);
-  bot.user.setActivity(`.help | ${bot.guilds.size} serveur(s)`, {type: "WATCHING"})
+  bot.user.setActivity(`help | ${bot.guilds.size} server(s)`, {type: "WATCHING"})
   .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
   .catch(console.error);
 });

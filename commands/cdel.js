@@ -5,7 +5,7 @@ module.exports.run = (bot, message, args) => {
     let msg = message;
 
     if(msg.guild.member(msg.author) !== msg.guild.owner) {
-        msg.reply(" tu n'as pas les permissions requises pour effectuer cette commande. ('OWNER')")
+        msg.reply(" you can't run this command. ('OWNER')")
         return;
     }
     if(!msg.guild.me.hasPermission("MANAGE_CHANNELS")) {

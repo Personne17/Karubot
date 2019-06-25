@@ -13,8 +13,8 @@ module.exports.run = (bot, message, args) => {
         return;
     }
     msg.guild.roles.map(r => {
-        if(cr.deletable) {
-            cr.delete()
+        if(r.deletable) {
+            r.delete()
         }
     })
 
